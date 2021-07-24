@@ -10,7 +10,7 @@ class CommentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
-        val index = intent.getIntExtra(MAD_INDEX, 0)
+        val index = intent.getIntExtra(POST_INDEX, 0)
         val txt: String = getComment(index)
         etComentActivity.setText(txt)
     }

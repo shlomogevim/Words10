@@ -11,22 +11,38 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() ,OnMadItemClickListener {
 
     lateinit var madList:ArrayList<Mad>
+    lateinit var postList:ArrayList<Post>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+       // window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
 
         madList= ArrayList()
-        addMads()
-        madRecycler.layoutManager= LinearLayoutManager(this)
+        postList= ArrayList()
+
+      //  addMads()
+        addPosts()
+
+       /* madRecycler.layoutManager= LinearLayoutManager(this)
         madRecycler.addItemDecoration(DividerItemDecoration(this,1))
-        madRecycler.adapter=MadAdapter(madList,this)
+        madRecycler.adapter=MadAdapter(madList,this)*/
+        postRecycler.layoutManager= LinearLayoutManager(this)
+        postRecycler.addItemDecoration(DividerItemDecoration(this,1))
+        postRecycler.adapter=PostAdapter(postList,this)
 
     }
 
+    private fun addPosts() {
+        postList.add(Post(1,"פוסט מס: 1","https://www.windguru.cz/station/1011",R.drawable.struggle))
+        postList.add(Post(2,"פוסט מס: 2","https://www.windguru.cz/station/1011",R.drawable.panorama))
+        postList.add(Post(3,"פוסט מס: 3","https://www.windguru.cz/station/1011",R.drawable.war))
+        postList.add(Post(4,"פוסט מס: 4","https://www.windguru.cz/station/1011",R.drawable.wamen))
+
+
+    }
     private fun addMads() {
         madList.add(Mad(1,"חוף און - בצת","https://www.windguru.cz/station/1011",R.drawable.b1))
         madList.add(Mad(2,"שבי ציון","https://www.windguru.cz/station/2763",R.drawable.b2))
@@ -47,9 +63,9 @@ class MainActivity : AppCompatActivity() ,OnMadItemClickListener {
 
     override fun onItemClick(item: Mad, position: Int) {
         val intent= Intent(this,MadDetailActivity::class.java)
-        intent.putExtra(MAD_NAME,item.name)
-        intent.putExtra(MAD_ADRESS,item.address)
-        intent.putExtra(MAD_INDEX,item.index)
+        intent.putExtra(POST_NAME,item.name)
+        intent.putExtra(POST_ADRESS,item.address)
+        intent.putExtra(POST_INDEX,item.index)
         startActivity(intent)
     }
 }
